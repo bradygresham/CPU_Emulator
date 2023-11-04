@@ -2,19 +2,22 @@
 typedef unsigned char byte;
 typedef unsigned short int byte_2;
 typedef unsigned int byte_4;
+typedef unsigned long int byte_8;
 
 struct CPU{
     char * instructions;
 
-    unsigned char * memory;
-    unsigned char * stack;
-    unsigned char * heap;
+    byte * memory;
+    byte * stack;
+    byte * heap;
     struct registers * registers;
     //registers
     
 };
 
 struct registers{
+    byte_8 SP;
+
     byte_2 V0;
     byte_2 V1;
     byte_2 V2;
@@ -39,3 +42,6 @@ void mov_constant(byte_2 *dest, byte_2 value);
 void mov_register(byte_2 *dest, byte_2 *src);
 
 void initialize_memory(struct CPU *cpu);
+
+void push(struct CPU *cpu, byte_2 *src);
+void pop();
