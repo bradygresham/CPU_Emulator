@@ -1,4 +1,4 @@
-
+#pragma once
 typedef unsigned char byte;
 typedef unsigned short int byte_2;
 typedef unsigned int byte_4;
@@ -7,8 +7,8 @@ typedef unsigned long int byte_8;
 struct CPU{
     char * instructions;
 
-    byte * memory;
-    byte * stack;
+    byte_4 * RAM;
+    byte_4 * stack;
     byte * heap;
     struct registers * registers;
     //registers
@@ -16,32 +16,35 @@ struct CPU{
 };
 
 struct registers{
-    byte_8 SP;
-
-    byte_2 V0;
-    byte_2 V1;
-    byte_2 V2;
-    byte_2 V3;
-    byte_2 V4;
-    byte_2 V5;
-    byte_2 V6;
-    byte_2 V7;
-    byte_2 V8;
-    byte_2 V9;
-    byte_2 VA;
-    byte_2 VB;
-    byte_2 VC;
-    byte_2 VD;
-    byte_2 VE;
-    byte_2 VF;
+    byte_4 *SP;
+    byte_4 *PC;
+    
+    byte V0;
+    byte V1;
+    byte V2;
+    byte V3;
+    byte V4;
+    byte V5;
+    byte V6;
+    byte V7;
+    byte V8;
+    byte V9;
+    byte VA;
+    byte VB;
+    byte VC;
+    byte VD;
+    byte VE;
+    byte VF;
 };
 
-void memory_cleanup(struct CPU *cpu);
+extern void memory_cleanup(struct CPU *cpu);
 
-void mov_constant(byte_2 *dest, byte_2 value);
-void mov_register(byte_2 *dest, byte_2 *src);
+extern void mov_constant(byte *dest, byte value);
+extern void mov_register(byte *dest, byte *src);
 
-void initialize_memory(struct CPU *cpu);
+extern void initialize_memory(struct CPU *cpu);
 
-void push(struct CPU *cpu, byte_2 *src);
-void pop();
+extern void push(struct CPU *cpu, byte *src);
+extern void pop();
+
+extern void print_registers(struct CPU *cpu);
