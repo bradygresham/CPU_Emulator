@@ -29,6 +29,27 @@ void initialize_memory(struct CPU *cpu)
     cpu->heap = malloc(256);
     cpu->instructions = malloc(256);
 }
+void read_instructions(struct CPU *cpu, char *filename)
+{
+    FILE *fp = fopen(filename, "r");
+    if(fp == NULL){
+        printf("Error opening file\n");
+        exit(1);
+    }
+    size_t len = 0;
+    size_t read;
+    int i = 0;
+    while((read = getline(&cpu->instructions[i], &len, fp)) != -1){
+        i++;
+    }
+    
+    fclose(fp);
+    
+}
+void run_instructions(struct CPU *cpu)
+{
+   
+}
 void push(struct CPU *cpu, byte *src)
 {
     cpu->stack = malloc(sizeof(src));
@@ -56,4 +77,14 @@ void print_registers(struct CPU *cpu)
     printf("SP: %p\n", cpu->registers->SP);
     printf("PC: %p\n", cpu->registers->PC);
 
+}
+
+void print_instructions(struct CPU *cpu)
+{
+    int i = 0;
+    while(cpu->instructions[i] != NULL){
+        printf("%s", cpu->instructions[i]);
+        i++;
+    }
+    printf("\n");
 }
