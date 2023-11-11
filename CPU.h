@@ -1,8 +1,6 @@
 #pragma once
-typedef unsigned char byte;
-typedef unsigned short int byte_2;
-typedef unsigned int byte_4;
-typedef unsigned long int byte_8;
+#include "typedef.h"
+#include "ASM.h"
 
 struct CPU{
     char ** instructions;
@@ -38,9 +36,6 @@ struct registers{
 };
 
 extern void memory_cleanup(struct CPU *cpu);
-
-extern void mov_constant(byte *dest, byte value);
-extern void mov_register(byte *dest, byte *src);
 
 extern void initialize_memory(struct CPU *cpu);
 extern void read_instructions(struct CPU *cpu, char *filename);

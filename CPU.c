@@ -10,14 +10,7 @@ void memory_cleanup(struct CPU *cpu)
     free(cpu->instructions);
     free(cpu);
 }
-void mov_constant(byte *dest, byte value)
-{
-    *dest = value;
-}
-void mov_register(byte *dest, byte *src)
-{
-    *dest = *src;
-}
+
 void initialize_memory(struct CPU *cpu)
 {
     cpu->RAM = malloc(1024);
@@ -48,7 +41,11 @@ void read_instructions(struct CPU *cpu, char *filename)
 }
 void run_instructions(struct CPU *cpu)
 {
-   
+    if (cpu->instructions[0] == NULL){
+        printf("No instructions to run\n");
+        exit(EXIT_FAILURE);
+    }
+
 }
 void push(struct CPU *cpu, byte *src)
 {
@@ -76,7 +73,6 @@ void print_registers(struct CPU *cpu)
     printf("VF: %d\n", cpu->registers->VF);
     printf("SP: %p\n", cpu->registers->SP);
     printf("PC: %p\n", cpu->registers->PC);
-
 }
 
 void print_instructions(struct CPU *cpu)
